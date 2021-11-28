@@ -2,15 +2,16 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class SS_FormSearch extends CI_Model
 {
-	var $table = "nama_tabel";  //table yang ingin di tampilkan
+	var $table = "tbl_setting_default";  //table yang ingin di tampilkan
 	var $select_column = array(
-		"nama_kolom_1",
-		"nama_kolom_2"
+		"id",
+		"kolom_1",
+		"kolom_2"
 	);  //sesuaikan dengan nama field table
 	var $order_column = array(
 		null,
-		"nama_kolom_1",
-		"nama_kolom_2"
+		"kolom_1",
+		"kolom_2"
 	);
 
 	function make_query()
@@ -18,13 +19,13 @@ class SS_FormSearch extends CI_Model
 		$this->db->select($this->select_column);
 		$this->db->from($this->table);
 		if (isset($_POST["search"]["value"])) {
-			$this->db->like("nama_kolom_1", $_POST["search"]["value"]);
-			$this->db->or_like("nama_kolom_2", $_POST["search"]["value"]);
+			$this->db->like("kolom_1", $_POST["search"]["value"]);
+			$this->db->or_like("kolom_2", $_POST["search"]["value"]);
 		}
 		if (isset($_POST["order"])) {
 			$this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
 		} else {
-			$this->db->order_by('nama_kolom', 'DESC');
+			$this->db->order_by('id', 'DESC');
 		}
 	}
 
