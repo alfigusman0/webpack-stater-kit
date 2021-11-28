@@ -19,6 +19,7 @@
 ## Components
 ### [CI Logs Viewer](https://github.com/SeunMatt/codeigniter-log-viewer) 
 - Version : ^1.1
+- Access logs : http://localhost/folder_name/Logs
 ### [PHP Spread Sheet](https://github.com/PHPOffice/PhpSpreadsheet)
 - Version : ^1.14
 ### [MPDF](https://mpdf.github.io)

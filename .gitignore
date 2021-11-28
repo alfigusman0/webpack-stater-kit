@@ -15,10 +15,14 @@ application/logs/*
 !application/logs/.htaccess
 import/*
 !import/index.html
+!import/.htaccess
 !import/*/index.html
+!import/*/.htaccess
 upload/*
 !upload/index.html
+!upload/.htaccess
 !upload/*/index.html
+!upload/*/.htaccess
 
 .env
 !.env.example
