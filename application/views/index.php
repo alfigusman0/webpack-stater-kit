@@ -58,11 +58,11 @@ desired effect
 		<!-- Main Header -->
 		<header class="main-header">
 			<!-- Logo -->
-			<a href="<?= base_url('Dashboard'); ?>" class="logo">
+			<a href="<?= base_url('Welcome'); ?>" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>PMB</b></span>
+				<span class="logo-mini"><b>WEB</b></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>PMB</b>UIN</span>
+				<span class="logo-lg"><b>WEB</b>APP</span>
 			</a>
 			<!-- Header Navbar -->
 			<?php $this->load->view('layout/navbar'); ?>

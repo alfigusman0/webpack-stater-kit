@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2021 at 09:30 PM
+-- Generation Time: Nov 29, 2021 at 12:01 AM
 -- Server version: 5.7.36-0ubuntu0.18.04.1-log
 -- PHP Version: 7.2.34-26+ubuntu18.04.1+deb.sury.org+1
 
@@ -48,6 +48,21 @@ CREATE TABLE `ci_session` (
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ci_session`
+--
+
+INSERT INTO `ci_session` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('8iojmsef4jh30eo2r45ksv6fjo17f2io', '::1', 1638116676, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131363637363b),
+('asl2rl8j6r2rc9or3nncpfmovav7u7fu', '::1', 1638117280, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131373238303b),
+('ict4u6cn8vqcd4eq8cbq040lhdvrsct6', '::1', 1638118342, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131383334323b),
+('iqnf58mgvem0etag30288tarnc7up8rc', '::1', 1638116979, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131363937393b),
+('lcas07sndid3cdq3bauderjdrsvmtd5u', '::1', 1638116272, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131363237323b),
+('q5i1mehkam5ot79afovti2suf8cd38pn', '::1', 1638117943, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131373934333b),
+('qckectgpd7oio5qr8j630efablk1hprf', '::1', 1638118706, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131383730363b),
+('r791oaqdog89vuv8bon0lg66ebss0n2n', '::1', 1638117591, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131373539313b),
+('vse04n8ipuikal0tmhf9m3pof24k7e27', '::1', 1638118845, 0x5f5f63695f6c6173745f726567656e65726174657c693a313633383131383730363b);
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +78,16 @@ CREATE TABLE `tbl_setting_default` (
   `updated_by` int(11) NOT NULL DEFAULT '1',
   `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_setting_default`
+--
+
+INSERT INTO `tbl_setting_default` (`id`, `kolom_1`, `kolom_2`, `created_by`, `date_created`, `updated_by`, `date_updated`) VALUES
+(1, 'TEST 1', '1', 1, '2020-11-28 16:29:57', 1, '2021-11-28 16:57:46'),
+(2, 'TEST 2', '0', 1, '2020-11-28 16:30:06', 1, '2021-11-28 16:58:00'),
+(3, 'TEST 3', '1', 1, '2021-11-28 16:30:15', 1, '2021-11-28 16:30:15'),
+(4, 'TEST 4', '0', 1, '2021-11-28 16:30:22', 1, '2021-11-28 16:30:22');
 
 -- --------------------------------------------------------
 
@@ -138,7 +163,7 @@ ALTER TABLE `ci_jwt`
 -- AUTO_INCREMENT for table `tbl_setting_default`
 --
 ALTER TABLE `tbl_setting_default`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_setting_users`

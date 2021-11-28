@@ -2,26 +2,34 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class SS_FormFilter extends CI_Model
 {
-	var $table = 'nama_tabel'; // Nama Tabel
+	var $table = 'tbl_setting_default'; // Nama Tabel
 	var $column_order = array(
+		"id",
 		null,
-		"nama_kolom_1",
-		"nama_kolom_2"
+		"kolom_1",
+		"kolom_2",
+		"date_created",
+		"date_updated",
 	); //set column field database for datatable orderable
 	var $column_search = array(
-		"nama_kolom_1",
-		"nama_kolom_2"
+		"kolom_1",
+		"kolom_2",
+		"date_created",
 	);  //set column field database for datatable searchabl
-	var $order = array('nama_kolom' => 'desc'); // default order
+	var $order = array('id' => 'desc'); // default order
 
 	private function _get_datatables_query()
 	{
 		//add custom filter here
-		if ($this->input->post('nama_kolom_1')) {
-			$this->db->like('nama_kolom_1', $this->input->post('nama_kolom_1'));
+		if ($this->input->post('kolom_1')) {
+			$this->db->like('kolom_1', $this->input->post('kolom_1'));
 		}
-		if ($this->input->post('nama_kolom_2')) {
-			$this->db->like('nama_kolom_2', $this->input->post('nama_kolom_2'));
+		if ($this->input->post('kolom_2')) {
+			$kolom_2 = ($this->input->post('kolom_2') == 'false') ? '0' : '1';
+			$this->db->where('kolom_2', $kolom_2);
+		}
+		if ($this->input->post('tahun')) {
+			$this->db->where('YEAR(date_created)', $this->input->post('tahun'));
 		}
 
 		$this->db->from($this->table);
