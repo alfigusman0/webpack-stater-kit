@@ -1,10 +1,10 @@
-# webpack-stater-kit
+# Codeigniter webpack stater kit
 
 ## Requirements
 - PHP 7.2 up to PHP 7.4
 
 ## How to install
-1. [Download this source]()
+1. [Download this source](https://github.com/alfigusman0/webpack-stater-kit/archive/refs/heads/ci3_v1.0.zip)
 2. Extract folder after download
 3. Open the previously extracted folder
 4. Install componets using composer `composer install` or `composer install --ignore-platform-reqs`
