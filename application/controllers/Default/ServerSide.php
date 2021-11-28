@@ -66,7 +66,7 @@ class ServerSide extends CI_Controller
 		$no = $_POST['start'];
 		foreach ($list as $row) {
 			$sub_array = array();
-			$sub_array[] = $no++;
+			$sub_array[] = ++$no;
 			$sub_array[] = "
                 <div class=\"btn-group\">
                     <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
@@ -80,6 +80,8 @@ class ServerSide extends CI_Controller
                 </div>";
 			$sub_array[] = $row->kolom_1;
 			$sub_array[] = ($row->kolom_2 == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
+			$sub_array[] = $row->date_created;
+			$sub_array[] = $row->date_updated;
 
 			$data[] = $sub_array;
 		}
@@ -101,7 +103,7 @@ class ServerSide extends CI_Controller
 		$no = $_POST['start'];
 		foreach ($fetch_data as $row) {
 			$sub_array = array();
-			$sub_array[] = $no++;
+			$sub_array[] = ++$no;
 			$sub_array[] = "
                 <div class=\"btn-group\">
                     <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
@@ -111,9 +113,11 @@ class ServerSide extends CI_Controller
                         <li><a href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a></li>
                     </ul>
                 </div>";
-			$sub_array[] = $row->nama;
-			$sub_array[] = $row->username;
-			$sub_array[] = $row->level;
+			$sub_array[] = $row->kolom_1;
+			$sub_array[] = ($row->kolom_2 == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
+			$sub_array[] = $row->date_created;
+			$sub_array[] = $row->date_updated;
+
 			$data[] = $sub_array;
 		}
 		$output = array(

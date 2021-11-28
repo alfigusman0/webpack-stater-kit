@@ -15,14 +15,6 @@
 		<div class="box">
 			<div class="box-header with-border">
 				<h3 class="box-title">Tabel Settings Default</h3>
-				<div class="pull-right">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fa fa-gears">&nbsp;</i> <span class="caret"></span>
-						</button>
-
-					</div>
-				</div>
 			</div>
 			<div class="box-body">
 				<div class="row">
@@ -39,8 +31,8 @@
 								<div class="col-sm-10">
 									<select class="form-control" id="kolom_2">
 										<option value="">&laquo; Semua &raquo;</option>
-										<option value="0">False</option>
-										<option value="1">True</option>
+										<option value="false">False</option>
+										<option value="true">True</option>
 									</select>
 								</div>
 							</div>
@@ -64,13 +56,15 @@
 				</div>
 				<br />
 				<div class="table-responsive">
-					<table id="table" class="table table-bordered table-striped">
+					<table id="table" class="table table-bordered table-striped" style="width: 100%;">
 						<thead>
 							<tr>
 								<th>No</th>
 								<th>Action</th>
 								<th>Kolom 1</th>
 								<th>Kolom 2</th>
+								<th>Date Created</th>
+								<th>Date Updated</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -81,6 +75,8 @@
 								<th>Action</th>
 								<th>Kolom 1</th>
 								<th>Kolom 2</th>
+								<th>Date Created</th>
+								<th>Date Updated</th>
 							</tr>
 						</tfoot>
 					</table>

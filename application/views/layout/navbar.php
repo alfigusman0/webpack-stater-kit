@@ -12,23 +12,23 @@
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <!-- The user image in the navbar-->
-                    <img src="<?=base_url('assets/img/avatar.png');?>" class="user-image" alt="User Image">
+                    <img src="<?= base_url('assets/img/avatar.png'); ?>" class="user-image" alt="User Image">
                     <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                    <span class="hidden-xs"><?=$this->jwt->nama?></span>
+                    <span class="hidden-xs">Alfi Gusman</span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- The user image in the menu -->
                     <li class="user-header">
-                        <img src="<?=base_url('assets/img/avatar.png');?>" class="img-circle" alt="User Image">
+                        <img src="<?= base_url('assets/img/avatar.png'); ?>" class="img-circle" alt="User Image">
                         <p>
-                            <?=$this->jwt->nama?> - <?=$this->jwt->level?>
-                            <small><?=$this->jwt->ip_login?></small>
+                            Alfi Gusman - Development
+                            <small>127.0.0.1</small>
                         </p>
                     </li>
                     <!-- Menu Footer-->
                     <li class="user-footer">
                         <div class="pull-right">
-                            <a href="<?=base_url('Auth/Logout');?>" class="btn btn-default btn-flat">Sign out</a>
+                            <a href="<?= base_url('#'); ?>" class="btn btn-default btn-flat">Sign out</a>
                         </div>
                     </li>
                 </ul>

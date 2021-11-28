@@ -11,7 +11,7 @@
                 type: "POST"
             },
             "columnDefs": [{
-                "targets": [0, 3, 3], // sesuaikan order table dengan jumlah column
+                "targets": [0, 4, 5], // sesuaikan order table dengan jumlah column
                 "orderable": true,
             }, ],
         });
