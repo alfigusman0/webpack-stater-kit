@@ -1,0 +1,40 @@
+{
+	"description": "Webpack Stater Kit",
+	"name": "alfigusman0/webpack-stater-kit",
+	"type": "project",
+	"homepage": "https://alfi-gusman.web.id",
+	"license": "MIT",
+	"support": {
+		"source": "https://github.com/alfigusman0/webpack-stater-kit"
+	},
+	"authors": [{
+			"name": "Alfi Gusman",
+			"email": "alfigusman0@gmail.com",
+			"homepage": "http://alfi-gusman.web.id",
+			"role": "Developer"
+		},
+		{
+			"name": "Piscal Pratama Putra",
+			"email": "piscalpratama@gmail.com",
+			"homepage": "http://piscal-pratama.web.id",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.7",
+		"seunmatt/codeigniter-log-viewer": "^1.1",
+		"phpoffice/phpspreadsheet": "^1.14",
+		"mpdf/mpdf": "^8.0",
+		"firebase/php-jwt": "^5.2",
+		"vlucas/phpdotenv": "^5.3",
+		"chriskacerguis/codeigniter-restserver": "dev-master",
+		"endroid/qr-code": "^4.2"
+	},
+	"suggest": {
+		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
+	},
+	"require-dev": {
+		"mikey179/vfsstream": "1.1.*",
+		"phpunit/phpunit": "4.* || 5.*"
+	}
+}
