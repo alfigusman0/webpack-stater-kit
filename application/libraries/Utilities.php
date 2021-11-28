@@ -26,7 +26,7 @@ class Utilities
     }
 
     /* Send Email */
-    public function sendEmail($username, $password, $from = "contact@uinsgd.ac.id", $cc = "admin.pmb@uinsgd.ac.id", $title = "No-Reply - UIN Sunan Gunung Djati", $subject = "UIN Sunan Gunung Djati Bandung", $email, $content)
+    public function sendEmail($username, $password, $from = "alfi.gusman.9f@gmail.com", $cc = "alfi.gusman.9f@gmail.com", $title = "No-Reply - Web Apps", $subject = "Web Apps", $email, $content)
     {
         $config = array(
             'protocol' => 'smtp',
@@ -108,5 +108,16 @@ class Utilities
         curl_close($ch);
         $respond = json_decode($respond);
         return $respond;
+    }
+
+    public function convertDateTime($date, $format = 'Y-m-d H:i:s')
+    {
+        $tz1 = 'UTC';
+        $tz2 = 'Asia/Jakarta'; // UTC +7
+
+        $d = new DateTime($date, new DateTimeZone($tz1));
+        $d->setTimeZone(new DateTimeZone($tz2));
+
+        return $d->format($format);
     }
 }
