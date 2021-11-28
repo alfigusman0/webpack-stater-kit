@@ -1,4 +1,17 @@
 <?php
+
+/**
+ * PHP JWT porting for Codeigniter
+ *
+ * @package        	CodeIgniter
+ * @subpackage    	Libraries
+ * @category    	Libraries
+ * @porting author	alfi.gusman.9f@gmail.com
+ * @original author	http://alfi-gusman.web.id
+ * 
+ * @version		1.0
+ */
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 use \Firebase\JWT\JWT;

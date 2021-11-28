@@ -9,7 +9,7 @@
  * @porting author	alfi.gusman.9f@gmail.com
  * @original author	http://alfi-gusman.web.id
  * 
- * @version		1.0
+ * @version		1.1
  */
 
 defined('BASEPATH') or exit('No direct script access allowed');
