@@ -32,3 +32,7 @@
 - Version : dev-master (^3.1.1)
 ### [QR Code](https://github.com/endroid/qr-code)
 - Version : ^4.2
+
+## Contributors
+1. [Alfi Gusman](https://alfi-gusman.web.id)
+2. [Piscal Pratama Putra]()
