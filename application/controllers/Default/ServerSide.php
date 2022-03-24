@@ -29,6 +29,7 @@ class ServerSide extends CI_Controller
 	function index()
 	{
 		$data = array(
+			'title'       	=> 'DataTables | Web Apps',
 			'content'       => 'default/content',
 			'css'           => 'default/css',
 			'javascript'    => 'default/javascript',
@@ -40,6 +41,7 @@ class ServerSide extends CI_Controller
 	function FormFilter()
 	{
 		$data = array(
+			'title'       	=> 'Form Filter | Web Apps',
 			'content'       => 'ServerSide/FormFilter/content',
 			'css'           => 'ServerSide/FormFilter/css',
 			'javascript'    => 'ServerSide/FormFilter/javascript',
@@ -51,6 +53,7 @@ class ServerSide extends CI_Controller
 	function FormSearch()
 	{
 		$data = array(
+			'title'       	=> 'Form Search | Web Apps',
 			'content'       => 'ServerSide/FormSearch/content',
 			'css'           => 'ServerSide/FormSearch/css',
 			'javascript'    => 'ServerSide/FormSearch/javascript',

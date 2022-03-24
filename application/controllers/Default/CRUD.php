@@ -34,6 +34,7 @@ class CRUD extends CI_Controller
             'pagging'   => null,
         );
         $data = array(
+			'title'       	=> 'CRUD | Web Apps',
             'content'       => 'crud/content',
             'css'           => 'crud/css',
             'javascript'    => 'crud/javascript',

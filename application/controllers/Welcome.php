@@ -27,6 +27,7 @@ class Welcome extends CI_Controller
     function index()
     {
         $data = array(
+			'title'       	=> 'Dashboard | Web Apps',
             'content'       => 'default/content',
             'css'           => 'default/css',
             'javascript'    => 'default/javascript',
