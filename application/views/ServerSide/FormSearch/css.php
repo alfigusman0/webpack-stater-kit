@@ -1,1 +1,2 @@
-<link rel="stylesheet" href="<?=base_url('assets/css/dataTables.bootstrap.min.css');?>">
+<!-- DataTables -->
+<link rel="stylesheet" href="<?=base_url()?>assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">

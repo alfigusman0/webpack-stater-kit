@@ -1,33 +1,45 @@
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-	<section class="content-header">
-		<h1>
-			Settings Default
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-folder-open"></i> Settings</a></li>
-			<li>Default</li>
-		</ol>
-	</section>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Settings Default</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Settings</a></li>
+            <li class="breadcrumb-item active">Default</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
 
-	<section class="content">
-		<!-- Notification -->
-		<?php $this->load->view('layout/notification') ?>
-		<div class="box">
-			<div class="box-header with-border">
-				<h3 class="box-title">Tabel Settings Default</h3>
-			</div>
-			<div class="box-body">
-				<div class="row">
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Notification -->
+    <?php $this->load->view('layout/notification') ?>
+
+    <!-- Default box -->
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Tabel Settings Default</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
 					<div class="col-md-12">
 						<form id="form-filter" class="form-horizontal">
-							<div class="form-group">
-								<label for="kolom_1" class="col-sm-2 control-label">Kolom 1</label>
+							<div class="form-group row">
+								<label for="kolom_1" class="col-sm-2 col-form-label">Kolom 1</label>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" id="kolom_1" placeholder="Kolom 1">
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="kolom_2" class="col-sm-2 control-label">Kolom 2</label>
+							<div class="form-group row">
+								<label for="kolom_2" class="col-sm-2 col-form-label">Kolom 2</label>
 								<div class="col-sm-10">
 									<select class="form-control" id="kolom_2">
 										<option value="">&laquo; Semua &raquo;</option>
@@ -36,8 +48,8 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label for="tahun" class="col-sm-2 control-label">Tahun</label>
+							<div class="form-group row">
+								<label for="tahun" class="col-sm-2 col-form-label">Tahun</label>
 								<div class="col-sm-10">
 									<select class="form-control" id="tahun">
 										<option value="">&laquo; Semua &raquo;</option>
@@ -81,7 +93,12 @@
 						</tfoot>
 					</table>
 				</div>
-			</div>
-		</div>
-	</section>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+  </section>
+  <!-- /.content -->
 </div>
+<!-- /.content-wrapper -->

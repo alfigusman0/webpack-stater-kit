@@ -68,16 +68,15 @@ class ServerSide extends CI_Controller
 			$sub_array = array();
 			$sub_array[] = ++$no;
 			$sub_array[] = "
-                <div class=\"btn-group\">
-                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                        <i class='fa fa-gear'></i> <span class=\"caret\"></span>
-                    </button>
-                    <ul class=\"dropdown-menu\">
-                        <li><a href=\"" . base_url('#' . $row->id) . "\" target='_blank'>Detail</a></li>
-                        <li role=\"separator\" class=\"divider\"></li>
-                        <li><a href=\"" . base_url('#' . $row->id) . "\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Delete</i></a></li>
-                    </ul>
-                </div>";
+				<div class=\"btn-group\">
+					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+						<i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
+					</button>
+					<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" target=\"_blank\">Detail</a>
+						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
+					</ul>
+				</div>";
 			$sub_array[] = $row->kolom_1;
 			$sub_array[] = ($row->kolom_2 == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
 			$sub_array[] = $row->date_created;
@@ -105,14 +104,15 @@ class ServerSide extends CI_Controller
 			$sub_array = array();
 			$sub_array[] = ++$no;
 			$sub_array[] = "
-                <div class=\"btn-group\">
-                    <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                        <i class='fa fa-gear'></i> <span class=\"caret\"></span>
-                    </button>
-                    <ul class=\"dropdown-menu\">
-                        <li><a href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a></li>
-                    </ul>
-                </div>";
+				<div class=\"btn-group\">
+					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+						<i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
+					</button>
+					<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" target=\"_blank\">Detail</a>
+						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
+					</ul>
+				</div>";
 			$sub_array[] = $row->kolom_1;
 			$sub_array[] = ($row->kolom_2 == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
 			$sub_array[] = $row->date_created;

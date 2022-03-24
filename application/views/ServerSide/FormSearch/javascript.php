@@ -1,8 +1,9 @@
-<script src="<?= base_url('assets/js/jquery.dataTables.min.js'); ?>"></script>
-<script src="<?= base_url('assets/js//dataTables.bootstrap.min.js'); ?>"></script>
+<!-- DataTables -->
+<script src="<?=base_url()?>assets/plugins/datatables/jquery.dataTables.js"></script>
+<script src="<?=base_url()?>assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 <script>
     $(document).ready(function() {
-        var dataTable = $('#dataTable').DataTable({
+        var dataTable = $('#table').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
