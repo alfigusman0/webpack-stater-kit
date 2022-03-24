@@ -14,7 +14,7 @@
 
 ## Source
 1. [Codeigniter 3.1.11](codeigniter.com/userguide3/)
-2. [AdminLTE v2.4.18](https://adminlte.io/themes/AdminLTE/documentation/index.html)
+2. [AdminLTE v3.2.0](https://adminlte.io/docs/3.2/)
 
 ## Components
 ### [CI Logs Viewer](https://github.com/SeunMatt/codeigniter-log-viewer) 
