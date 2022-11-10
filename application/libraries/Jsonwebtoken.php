@@ -30,13 +30,14 @@ class Jsonwebtoken
         $this->CI->load->model('Cijwt');
     }
 
-    public function jwtEncode($payload, $ip_address)
+    public function jwtEncode($payload, $id_user, $ip_address)
     {
+        $expire_at = time() + (10 * 365 * 24 * 60 * 60);
         $JWT_TOKEN = JWT::encode($payload, $this->key_auth);
         $rules = array(
             'select'    => null,
             'where'     => array(
-                'jwt_token' => $JWT_TOKEN
+                'token' => $JWT_TOKEN
             ), //not null or null
             'or_where'  => null, //not null or null
             'order'     => null,
@@ -46,15 +47,20 @@ class Jsonwebtoken
         $cijwt = $this->CI->Cijwt->where($rules)->num_rows();
         if ($cijwt == 0) {
             $data = array(
+                'id_jwt' => (time() + 1),
+                'id_user' => $id_user,
                 'ip_address' => $ip_address,
-                'jwt_token' => $JWT_TOKEN,
+                'token' => $JWT_TOKEN,
+                'expire_at' => $expire_at,
+                'expired' => '0',
+                'keterangan' => 'LOGIN'
             );
             $this->CI->Cijwt->create($data);
         }
         $cookieJWT = array(
-            'name'   => 'JWT_TOKEN',
+            'name'   => $_ENV['COOKIE_NAME'],
             'value'  => $JWT_TOKEN,
-            'expire' => time() + (10 * 365 * 24 * 60 * 60),
+            'expire' => $expire_at,
         );
         $this->CI->input->set_cookie($cookieJWT);
         return $JWT_TOKEN;
@@ -62,11 +68,11 @@ class Jsonwebtoken
 
     public function jwtDecode()
     {
-        $JWT_TOKEN = $this->CI->input->cookie('JWT_TOKEN', TRUE);
+        $JWT_TOKEN = $this->CI->input->cookie($_ENV['COOKIE_NAME'], TRUE);
         $rules = array(
             'select'    => null,
             'where'     => array(
-                'jwt_token' => $JWT_TOKEN
+                'token' => $JWT_TOKEN
             ), //not null or null
             'or_where'  => null, //not null or null
             'order'     => null,
@@ -84,11 +90,11 @@ class Jsonwebtoken
 
     public function jwtUpdate($payload)
     {
-        $JWT_TOKEN = $this->CI->input->cookie('JWT_TOKEN', TRUE);
+        $JWT_TOKEN = $this->CI->input->cookie($_ENV['COOKIE_NAME'], TRUE);
         $rules = array(
             'select'    => null,
             'where'     => array(
-                'jwt_token' => $JWT_TOKEN
+                'token' => $JWT_TOKEN
             ), //not null or null
             'or_where'  => null, //not null or null
             'order'     => null,
@@ -99,15 +105,15 @@ class Jsonwebtoken
         $JWT_TOKEN = JWT::encode($payload, $this->key_auth);
         $rules = array(
             'where' => array(
-                'id' => $cijwt->id
+                'id_jwt' => $cijwt->id_jwt
             ), //null or not null
             'data'  => array(
-                'jwt_token' => $JWT_TOKEN,
+                'token' => $JWT_TOKEN,
             ), //null or not null
         );
         $this->CI->Cijwt->update($rules);
         $cookieJWT = array(
-            'name'   => 'JWT_TOKEN',
+            'name'   => $_ENV['COOKIE_NAME'],
             'value'  => $JWT_TOKEN,
             'expire' => time() + (10 * 365 * 24 * 60 * 60),
         );
@@ -117,11 +123,11 @@ class Jsonwebtoken
 
     public function jwtDelete()
     {
-        $JWT_TOKEN = $this->CI->input->cookie('JWT_TOKEN', TRUE);
+        $JWT_TOKEN = $this->CI->input->cookie($_ENV['COOKIE_NAME'], TRUE);
         $rules = array(
             'select'    => null,
             'where'     => array(
-                'jwt_token' => $JWT_TOKEN
+                'token' => $JWT_TOKEN
             ), //not null or null
             'or_where'  => null, //not null or null
             'order'     => null,
@@ -130,10 +136,10 @@ class Jsonwebtoken
         );
         $cijwt = $this->CI->Cijwt->where($rules)->num_rows();
         if ($cijwt > 0) {
-            $rules = array('jwt_token' => $JWT_TOKEN);
+            $rules = array('token' => $JWT_TOKEN);
             $this->CI->Cijwt->delete($rules);
         }
-        delete_cookie('JWT_TOKEN');
+        delete_cookie($_ENV['COOKIE_NAME']);
         return true;
     }
 }

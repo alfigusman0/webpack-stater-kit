@@ -2,27 +2,34 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class Cijwt extends CI_Model
 {
-
     var $table = "ci_jwt";
 
     function create($data)
     {
         if ($this->db->insert($this->table, $data)) {
-            return TRUE;
+            $data = array(
+                'status' => false,
+                'message' => '',
+                'id' => $this->db->insert_id(),
+            );
         } else {
-            return FALSE;
+            $data = array(
+                'status' => true,
+                'message' => $this->db->error(),
+            );
+            return $data;
         }
+        return $data;
     }
 
-    /**
-    Rules Attributed Read Data
+    /* Rules Attributed Read Data
     $rules = array(
-    'select'    => null,
-    'order'     => null,
-    'limit'     => null,
-    'pagging'   => null,
+        'select'    => null,
+        'order'     => null,
+        'limit'     => null,
+        'pagging'   => null,
     );
-     **/
+    */
     function read($rules)
     {
         if ($rules['select'] != null) {
@@ -43,46 +50,57 @@ class Cijwt extends CI_Model
         }
     }
 
-    /**
-    Rules Attributed Update Data
+    /* Rules Attributed Update Data
     $rules = array(
-    'where' => null, //not null
-    'data'  => null, //not null
+        'where' => null, //not null
+        'data'  => null, //not null
     );
-     **/
+    */
     function update($rules)
     {
         $this->db->where($rules['where']);
         if ($this->db->update($this->table, $rules['data'])) {
-            return TRUE;
+            $rules = array(
+                'status' => false,
+                'message' => '',
+            );
         } else {
-            return FALSE;
+            $rules = array(
+                'status' => true,
+                'message' => $this->db->error(),
+            );
         }
+        return $rules;
     }
 
     function delete($where)
     {
         $this->db->where($where);
         if ($this->db->delete($this->table)) {
-            return TRUE;
+            $rules = array(
+                'status' => false,
+                'message' => '',
+            );
         } else {
-            return FALSE;
+            $rules = array(
+                'status' => true,
+                'message' => $this->db->error(),
+            );
         }
+        return $rules;
     }
 
     /* Extra */
-
-    /**
-    Rules Attributed Where Data
+    /* Rules Attributed Where Data
     $rules = array(
-    'select'    => null,
-    'where'     => null, //not null or null
-    'or_where'  => null, //not null or null
-    'order'     => null,
-    'limit'     => null,
-    'pagging'   => null,
+        'select'    => null,
+        'where'     => null, //not null or null
+        'or_where'  => null, //not null or null
+        'order'     => null,
+        'limit'     => null,
+        'pagging'   => null,
     );
-     **/
+    */
     function where($rules)
     {
         if ($rules['select'] != null) {
@@ -113,17 +131,16 @@ class Cijwt extends CI_Model
         }
     }
 
-    /**
-    Rules Attributed Like Data
+    /* Rules Attributed Like Data
     $rules = array(
-    'select'    => null,
-    'like'      => null, //not null or null
-    'or_like'   => null, //not null or null
-    'order'     => null,
-    'limit'     => null,
-    'pagging'   => null,
-    );
-     **/
+        'select'    => null,
+        'like'      => null, //not null or null
+        'or_like'   => null, //not null or null
+        'order'     => null,
+        'limit'     => null,
+        'pagging'   => null,
+        );
+    */
     function like($rules)
     {
         if ($rules['select'] != null) {
@@ -154,14 +171,13 @@ class Cijwt extends CI_Model
         }
     }
 
-    /**
-    Rules Attributed Distinc Data
+    /* Rules Attributed Distinc Data
     $rules = array(
-    'select'    => null, //not null
-    'where'     => null,
-    'order'     => null,
+        'select'    => null, //not null
+        'where'     => null,
+        'order'     => null,
     );
-     **/
+    */
     function distinct($rules)
     {
         $this->db->distinct();

@@ -2,18 +2,18 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 class SS_FormFilter extends CI_Model
 {
-	var $table = 'tbl_setting_default'; // Nama Tabel
+	var $table = 'tbs_default'; // Nama Tabel
 	var $column_order = array(
 		"id",
 		null,
 		"kolom_1",
-		"kolom_2",
+		"status",
 		"date_created",
 		"date_updated",
 	); //set column field database for datatable orderable
 	var $column_search = array(
 		"kolom_1",
-		"kolom_2",
+		"status",
 		"date_created",
 	);  //set column field database for datatable searchabl
 	var $order = array('id' => 'desc'); // default order
@@ -24,9 +24,8 @@ class SS_FormFilter extends CI_Model
 		if ($this->input->post('kolom_1')) {
 			$this->db->like('kolom_1', $this->input->post('kolom_1'));
 		}
-		if ($this->input->post('kolom_2')) {
-			$kolom_2 = ($this->input->post('kolom_2') == 'false') ? '0' : '1';
-			$this->db->where('kolom_2', $kolom_2);
+		if ($this->input->post('status')) {
+			$this->db->where('status', $this->input->post('status'));
 		}
 		if ($this->input->post('tahun')) {
 			$this->db->where('YEAR(date_created)', $this->input->post('tahun'));
