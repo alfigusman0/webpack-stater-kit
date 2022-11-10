@@ -13,7 +13,7 @@ class CRUD extends CI_Controller
             redirect('Welcome/');
         }
 
-        if ($this->jwt->app != 'Application') {
+        if ($this->jwt->app != $_ENV['APPLICATION_NAME']) {
             redirect('Welcome/');
         }
 
@@ -35,10 +35,10 @@ class CRUD extends CI_Controller
         );
         $data = array(
             'title'         => 'CRUD | Web Apps',
-            'content'       => 'crud/content',
-            'css'           => 'crud/css',
-            'javascript'    => 'crud/javascript',
-            'modal'         => 'crud/modal',
+            'content' => 'crud/content',
+            'css' => 'crud/css',
+            'javascript' => 'crud/javascript',
+            'modal' => 'crud/modal',
             'tblDefault'    => $this->Default_model->read($rules)->result(),
         );
         $this->load->view('index', $data);

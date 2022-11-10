@@ -8,20 +8,20 @@ class ServerSide extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		/* $this->jwt = $this->jsonwebtoken->jwtDecode();
-        if ($this->jwt == FALSE) {
-            redirect('Welcome');
-        }
+		$this->jwt = $this->jsonwebtoken->jwtDecode();
+		if ($this->jwt == FALSE) {
+			redirect('Welcome');
+		}
 
-        if ($this->jwt->app != 'Application') {
-            redirect('Welcome');
-        }
+		if ($this->jwt->app != $_ENV['APPLICATION_NAME']) {
+			redirect('Welcome');
+		}
 
-        if ($this->jwt->level == null) {
-            $this->session->set_flashdata('message', 'Hak akses ditolak.');
-            $this->session->set_flashdata('type_message', 'danger');
-            redirect('Welcome/');
-        } */
+		if ($this->jwt->level == null) {
+			$this->session->set_flashdata('message', 'Hak akses ditolak.');
+			$this->session->set_flashdata('type_message', 'danger');
+			redirect('Welcome/');
+		}
 		$this->load->model('ServerSide/SS_FormFilter');
 		$this->load->model('ServerSide/SS_FormSearch');
 	}
@@ -29,11 +29,11 @@ class ServerSide extends CI_Controller
 	function index()
 	{
 		$data = array(
-			'title'       	=> 'DataTables | Web Apps',
-			'content'       => 'default/content',
-			'css'           => 'default/css',
-			'javascript'    => 'default/javascript',
-			'modal'         => 'default/modal',
+			'title' => 'DataTables | Web Apps',
+			'content' => 'default/content',
+			'css' => 'default/css',
+			'javascript' => 'default/javascript',
+			'modal' => 'default/modal',
 		);
 		$this->load->view('index', $data);
 	}
@@ -41,11 +41,11 @@ class ServerSide extends CI_Controller
 	function FormFilter()
 	{
 		$data = array(
-			'title'       	=> 'Form Filter | Web Apps',
-			'content'       => 'ServerSide/FormFilter/content',
-			'css'           => 'ServerSide/FormFilter/css',
-			'javascript'    => 'ServerSide/FormFilter/javascript',
-			'modal'         => 'ServerSide/FormFilter/modal',
+			'title' => 'Form Filter | Web Apps',
+			'content' => 'ServerSide/FormFilter/content',
+			'css' => 'ServerSide/FormFilter/css',
+			'javascript' => 'ServerSide/FormFilter/javascript',
+			'modal' => 'ServerSide/FormFilter/modal',
 		);
 		$this->load->view('index', $data);
 	}
@@ -53,11 +53,11 @@ class ServerSide extends CI_Controller
 	function FormSearch()
 	{
 		$data = array(
-			'title'       	=> 'Form Search | Web Apps',
-			'content'       => 'ServerSide/FormSearch/content',
-			'css'           => 'ServerSide/FormSearch/css',
-			'javascript'    => 'ServerSide/FormSearch/javascript',
-			'modal'         => 'ServerSide/FormSearch/modal',
+			'title' => 'Form Search | Web Apps',
+			'content' => 'ServerSide/FormSearch/content',
+			'css' => 'ServerSide/FormSearch/css',
+			'javascript' => 'ServerSide/FormSearch/javascript',
+			'modal' => 'ServerSide/FormSearch/modal',
 		);
 		$this->load->view('index', $data);
 	}
@@ -76,8 +76,8 @@ class ServerSide extends CI_Controller
 						<i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
 					</button>
 					<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
-						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" target=\"_blank\">Detail</a>
-						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
+						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a>
+						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
 					</ul>
 				</div>";
 			$sub_array[] = $row->kolom_1;
@@ -112,8 +112,8 @@ class ServerSide extends CI_Controller
 						<i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
 					</button>
 					<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
-						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" target=\"_blank\">Detail</a>
-						<a class=\"dropdown-item\" href=\"".base_url('#' . $row->id)."\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
+						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a>
+						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
 					</ul>
 				</div>";
 			$sub_array[] = $row->kolom_1;
