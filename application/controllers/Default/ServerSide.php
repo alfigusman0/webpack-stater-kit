@@ -100,35 +100,42 @@ class ServerSide extends CI_Controller
 
 	function JsonFormSearch()
 	{
-		$fetch_data = $this->SS_FormSearch->make_datatables();
-		$data = array();
-		$no = $_POST['start'];
-		foreach ($fetch_data as $row) {
-			$sub_array = array();
-			$sub_array[] = ++$no;
-			$sub_array[] = "
-				<div class=\"btn-group\">
-					<button type=\"button\" class=\"btn btn-default dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-						<i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
-					</button>
-					<div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
-						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a>
-						<a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
-					</ul>
-				</div>";
-			$sub_array[] = $row->kolom_1;
-			$sub_array[] = ($row->kolom_2 == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
-			$sub_array[] = $row->date_created;
-			$sub_array[] = $row->date_updated;
-
-			$data[] = $sub_array;
-		}
-		$output = array(
-			"draw"				=>	intval($_POST["draw"]),
-			"recordsTotal"		=>	$this->SS_FormSearch->get_all_data(),
-			"recordsFiltered"	=>	$this->SS_FormSearch->get_filtered_data(),
-			"data"				=>	$data
-		);
-		echo json_encode($output);
+	    // Mengambil data dari model
+	    $fetch_data = $this->SS_FormSearch->get_datatables();
+	    $data = array();
+	    $no = $this->input->post('start'); // Menggunakan $this->input->post() daripada $_POST
+	
+	    foreach ($fetch_data as $row) {
+	        $sub_array = array();
+	        $sub_array[] = ++$no;
+	        $sub_array[] = "
+	            <div class=\"btn-group\">
+	                <button type=\"button\" class=\"btn btn-default dropdown-toggle\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+	                    <i class=\"fas fa-cog\"></i> <span class=\"caret\"></span>
+	                </button>
+	                <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">
+	                    <a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" target=\"_blank\">Detail</a>
+	                    <a class=\"dropdown-item\" href=\"" . base_url('#' . $row->id) . "\" onclick=\"return confirm('Apakah Anda Yakin ?')\">Hapus</a>
+	                </div>
+	            </div>";
+	        $sub_array[] = $row->kolom_1;
+	        $sub_array[] = ($row->status == '1') ? "<span class=\"label label-success\">True</span>" : "<span class=\"label label-danger\">False</span>";
+	        $sub_array[] = $row->date_created;
+	        $sub_array[] = $row->date_updated;
+	
+	        $data[] = $sub_array;
+	    }
+	
+	    // Menyusun output dalam format JSON
+	    $output = array(
+	        "draw"            => intval($this->input->post("draw")),
+	        "recordsTotal"    => $this->SS_FormSearch->count_all(),
+	        "recordsFiltered" => $this->SS_FormSearch->count_filtered(),
+	        "data"            => $data
+	    );
+	
+	    // Mengirimkan output JSON
+	    echo json_encode($output);
 	}
+
 }
