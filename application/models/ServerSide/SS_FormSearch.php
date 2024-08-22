@@ -7,12 +7,20 @@ class SS_FormSearch extends CI_Model
     protected $select_column = array('*'); // Kolom yang ingin di-select
     protected $order_column = array(
         'id',
-        null, // Kolom ini tidak akan diurutkan
+        null,
         'kolom_1',
         'status',
         'date_created',
         'date_updated',
     );
+
+    protected $column_search = array(
+        'kolom_1',
+        'status',
+        'date_created',
+    );
+
+    protected $order = array('id' => 'DESC'); // Default order
 
     /**
      * Build the query for data tables.
@@ -23,36 +31,40 @@ class SS_FormSearch extends CI_Model
         $this->db->from($this->table);
 
         // Apply search filters
-        if (!empty($_POST['search']['value'])) {
-            $search_value = $_POST['search']['value'];
+        $search_value = $this->input->post('search')['value'] ?? null;
+        if (!empty($search_value)) {
             $this->db->group_start(); // Open bracket for OR conditions
-            $this->db->like('kolom_1', $search_value);
-            $this->db->or_like('status', $search_value);
-            $this->db->or_like('date_created', $search_value);
-            $this->db->or_like('date_updated', $search_value);
+            foreach ($this->column_search as $index => $item) {
+                if ($index === 0) {
+                    $this->db->like($item, $search_value);
+                } else {
+                    $this->db->or_like($item, $search_value);
+                }
+            }
             $this->db->group_end(); // Close bracket
         }
 
         // Apply ordering
-        if (isset($_POST['order'])) {
-            $order_column = $this->order_column[$_POST['order'][0]['column']] ?? 'id';
-            $order_dir = $_POST['order'][0]['dir'] ?? 'DESC';
+        $order = $this->input->post('order');
+        if ($order) {
+            $order_column = $this->order_column[$order[0]['column']] ?? 'id';
+            $order_dir = $order[0]['dir'] ?? 'DESC';
             $this->db->order_by($order_column, $order_dir);
         } else {
-            $this->db->order_by('id', 'DESC');
+            $this->db->order_by(key($this->order), $this->order[key($this->order)]);
         }
     }
 
     /**
-     * Get the data for data tables with pagination.
+     * Fetch the data for data tables with pagination.
      *
      * @return array
      */
-    public function make_datatables()
+    public function get_datatables()
     {
         $this->_make_query();
-        $length = $_POST['length'] ?? -1;
-        $start = $_POST['start'] ?? 0;
+        $length = $this->input->post('length') ?? -1;
+        $start = $this->input->post('start') ?? 0;
         if ($length != -1) {
             $this->db->limit($length, $start);
         }
@@ -65,7 +77,7 @@ class SS_FormSearch extends CI_Model
      *
      * @return int
      */
-    public function get_filtered_data()
+    public function count_filtered()
     {
         $this->_make_query();
         $query = $this->db->get();
@@ -77,7 +89,7 @@ class SS_FormSearch extends CI_Model
      *
      * @return int
      */
-    public function get_all_data()
+    public function count_all()
     {
         $this->db->from($this->table);
         return $this->db->count_all_results();
