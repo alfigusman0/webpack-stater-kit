@@ -1,80 +1,108 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+
 class SS_FormFilter extends CI_Model
 {
-	var $table = 'tbs_default'; // Nama Tabel
-	var $column_order = array(
-		"id",
-		null,
-		"kolom_1",
-		"status",
-		"date_created",
-		"date_updated",
-	); //set column field database for datatable orderable
-	var $column_search = array(
-		"kolom_1",
-		"status",
-		"date_created",
-	);  //set column field database for datatable searchabl
-	var $order = array('id' => 'desc'); // default order
+    protected $table = 'tbs_default'; // Nama Tabel
+    protected $column_order = array(
+        "id",
+        null, // Kolom ini tidak akan diurutkan
+        "kolom_1",
+        "status",
+        "date_created",
+        "date_updated",
+    ); // Set column field database for datatable orderable
 
-	private function _get_datatables_query()
-	{
-		//add custom filter here
-		if ($this->input->post('kolom_1')) {
-			$this->db->like('kolom_1', $this->input->post('kolom_1'));
-		}
-		if ($this->input->post('status')) {
-			$this->db->where('status', $this->input->post('status'));
-		}
-		if ($this->input->post('tahun')) {
-			$this->db->where('YEAR(date_created)', $this->input->post('tahun'));
-		}
+    protected $column_search = array(
+        "kolom_1",
+        "status",
+        "date_created",
+    ); // Set column field database for datatable searchable
 
-		$this->db->from($this->table);
-		$i = 0;
+    protected $order = array('id' => 'desc'); // Default order
 
-		foreach ($this->column_search as $item) { // loop column
-			if ($_POST['search']['value']) { // if datatable send POST for search
-				if ($i === 0) { // first loop
-					$this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
-					$this->db->like($item, $_POST['search']['value']);
-				} else {
-					$this->db->or_like($item, $_POST['search']['value']);
-				}
-				if (count($this->column_search) - 1 == $i) //last loop
-					$this->db->group_end(); //close bracket
-			}
-			$i++;
-		}
+    /**
+     * Get the datatables query with filters and ordering.
+     */
+    private function _get_datatables_query()
+    {
+        $post = $this->input->post();
 
-		if (isset($_POST['order'])) { // here order processing
-			$this->db->order_by($this->column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
-		} else if (isset($this->order)) {
-			$order = $this->order;
-			$this->db->order_by(key($order), $order[key($order)]);
-		}
-	}
+        // Apply custom filters
+        $this->_apply_filter('kolom_1', 'kolom_1', $post, 'like');
+        $this->_apply_filter('status', 'status', $post, 'where');
+        $this->_apply_filter('tahun', 'YEAR(date_created)', $post, 'where');
 
-	public function get_datatables()
-	{
-		$this->_get_datatables_query();
-		if ($_POST['length'] != -1)
-			$this->db->limit($_POST['length'], $_POST['start']);
-		$query = $this->db->get();
-		return $query->result();
-	}
+        $this->db->from($this->table);
 
-	public function count_filtered()
-	{
-		$this->_get_datatables_query();
-		$query = $this->db->get();
-		return $query->num_rows();
-	}
+        // Apply search functionality
+        if (!empty($post['search']['value'])) {
+            $this->db->group_start(); // Open bracket for OR conditions
+            foreach ($this->column_search as $index => $item) {
+                $this->db->or_like($item, $post['search']['value']);
+            }
+            $this->db->group_end(); // Close bracket
+        }
 
-	public function count_all()
-	{
-		$this->db->from($this->table);
-		return $this->db->count_all_results();
-	}
+        // Apply order functionality
+        if (isset($post['order'])) {
+            $order_column = $this->column_order[$post['order'][0]['column']] ?? null;
+            $order_dir = $post['order'][0]['dir'] ?? 'asc';
+            if ($order_column) {
+                $this->db->order_by($order_column, $order_dir);
+            }
+        } else if (isset($this->order)) {
+            $order_key = key($this->order);
+            $this->db->order_by($order_key, $this->order[$order_key]);
+        }
+    }
+
+    /**
+     * Apply filter based on the type (like, where, etc.).
+     */
+    private function _apply_filter($field, $db_field, $post, $type)
+    {
+        if (!empty($post[$field])) {
+            $value = $post[$field];
+            if ($type === 'like') {
+                $this->db->like($db_field, $value);
+            } elseif ($type === 'where') {
+                $this->db->where($db_field, $value);
+            }
+        }
+    }
+
+    /**
+     * Fetch the datatables results.
+     */
+    public function get_datatables()
+    {
+        $this->_get_datatables_query();
+        $length = $this->input->post('length');
+        $start = $this->input->post('start');
+        if ($length != -1) {
+            $this->db->limit($length, $start);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    /**
+     * Count the filtered results.
+     */
+    public function count_filtered()
+    {
+        $this->_get_datatables_query();
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    /**
+     * Count all results in the table.
+     */
+    public function count_all()
+    {
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
+    }
 }
